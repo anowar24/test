@@ -5,7 +5,7 @@ This document describes the flow and functionality of the Single User Liveness C
 ## Main Flow Diagram
 
 ```mermaid
-flowchart TD
+flowchart TD;
     A[Screen Initialize] --> B[Initialize Services]
     B --> C[Setup Camera]
     C --> D[Initialize Face Recognition Service]
@@ -60,7 +60,7 @@ flowchart TD
 ## Liveness Check Process
 
 ```mermaid
-flowchart TD
+flowchart TD;
     A[Start Liveness Check] --> B[Reset All Counters]
     B --> C[Begin Continuous Face Analysis]
     
@@ -126,7 +126,7 @@ flowchart TD
 ## Camera and Image Processing
 
 ```mermaid
-flowchart TD
+flowchart TD;
     A[Camera Initialization] --> B{Available Cameras?}
     B -->|No| C[Show Camera Error]
     B -->|Yes| D[Select Front Camera by Default]
@@ -168,102 +168,11 @@ flowchart TD
     style S fill:#e8f5e8
 ```
 
-## State Management
-
-```mermaid
-stateDiagram-v2
-    [*] --> Initializing
-    Initializing --> Error : Initialization Failed
-    Initializing --> Ready : Services Initialized
-    
-    Ready --> FaceDetection : Face Detected
-    FaceDetection --> Ready : Face Lost
-    FaceDetection --> LivenessChecking : User Starts Check
-    
-    LivenessChecking --> FaceVerification : Begin Verification
-    FaceVerification --> LivenessTests : Face Recognized
-    FaceVerification --> FaceDetection : Verification Failed
-    
-    LivenessTests --> SmileTest : Check Smile
-    LivenessTests --> BlinkTest : Check Blink
-    LivenessTests --> HeadMovementTest : Check Movement
-    LivenessTests --> ConsistencyTest : Check Consistency
-    
-    SmileTest --> SmilePassed : 3 Smiles Detected
-    SmilePassed --> AllTestsCheck : Test Complete
-    
-    BlinkTest --> BlinkPassed : 2 Blinks Detected
-    BlinkPassed --> AllTestsCheck : Test Complete
-    
-    HeadMovementTest --> MovementPassed : Movement Detected
-    MovementPassed --> AllTestsCheck : Test Complete
-    
-    ConsistencyTest --> ConsistencyPassed : Variance Valid
-    ConsistencyPassed --> AllTestsCheck : Test Complete
-    
-    AllTestsCheck --> LivenessPassed : All Tests Complete
-    AllTestsCheck --> LivenessTests : More Tests Needed
-    
-    LivenessPassed --> SubmittingAttendance : Auto Submit
-    SubmittingAttendance --> Complete : Attendance Recorded
-    SubmittingAttendance --> Error : Submission Failed
-    
-    Error --> [*] : User Goes Back
-    Complete --> [*] : Navigate Away
-    
-    note right of LivenessTests
-        All tests run concurrently
-        while continuously monitoring
-        the user's face
-    end note
-    
-    note right of FaceVerification
-        Verifies current face matches
-        the target user's stored
-        embedding before proceeding
-    end note
-```
-
-## Key Components and Services
-
-```mermaid
-graph LR
-    A[SingleUserLivenessCheckScreen] --> B[CameraController]
-    A --> C[FaceRecognitionService]
-    A --> D[ML Kit Face Detection]
-    A --> E[DeviceService]
-    A --> F[DatabaseService]
-    A --> G[AttendanceProvider]
-    
-    B --> H[Camera Preview]
-    B --> I[Image Stream Processing]
-    
-    C --> J[Face Embedding Extraction]
-    C --> K[Similarity Calculation]
-    
-    D --> L[Face Detection with Classifications]
-    D --> M[Smile/Blink/Eye Tracking]
-    D --> N[Head Pose Estimation]
-    
-    E --> O[Location Services]
-    E --> P[Device Context]
-    
-    F --> Q[User Data Retrieval]
-    F --> R[Embedding Storage]
-    
-    G --> S[Attendance Record Creation]
-    G --> T[Staff Management Integration]
-    
-    style A fill:#e3f2fd
-    style C fill:#fff3e0
-    style D fill:#fff3e0
-    style G fill:#e8f5e8
-```
 
 ## Anti-Spoofing Measures
 
 ```mermaid
-flowchart TD
+flowchart TD;
     A[Anti-Spoofing Protection] --> B[Face Recognition Verification]
     A --> C[Liveness Detection]
     A --> D[Behavioral Analysis]
@@ -307,7 +216,7 @@ flowchart TD
 ## Error Handling
 
 ```mermaid
-flowchart TD
+flowchart TD;
     A[Error Scenarios] --> B[Camera Initialization Failure]
     A --> C[Face Recognition Service Failure]
     A --> D[Face Detection Failure]
